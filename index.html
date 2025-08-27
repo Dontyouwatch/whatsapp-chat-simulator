@@ -1,145 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WhatsApp Replay - Relive Your Chat Memories</title>
-  <link rel="stylesheet" href="style.css">
-  <script>
-    // Helper to load external HTML (header/footer)
-    function includeHTML(file, elementId) {
-      fetch(file)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById(elementId).innerHTML = data;
-        });
-    }
-    document.addEventListener("DOMContentLoaded", function() {
-      includeHTML('header.html', 'header-placeholder');
-      includeHTML('footer.html', 'footer-placeholder');
-    });
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Replay - Relive Your Chat Memories</title>
+<!-- Link to your external CSS file -->
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <!-- Header -->
-  <div id="header-placeholder"></div>
-
-  <!-- Main Body -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">Relive Your WhatsApp Memories</h1>
-        <p class="hero-subtitle">Transform your exported WhatsApp chats into beautiful, interactive conversations. Revisit precious moments with friends and family in an authentic chat interface.</p>
-        <ul class="hero-features">
-          <li>Upload any WhatsApp chat export</li>
-          <li>Authentic WhatsApp-style display</li>
-          <li>Preserve your precious memories</li>
-          <li>100% Private & Secure</li>
-        </ul>
-        <div class="cta-buttons">
-          <a href="index1.html" class="cta-primary">
-            🚀 Start Reliving Memories
-          </a>
-          <a href="#features" class="cta-secondary">Learn More</a>
-        </div>
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+<!-- Hero Section -->
+<section class="hero">
+<div class="hero-content">
+<div class="hero-text">
+<h1 class="hero-title">Relive Your WhatsApp Memories</h1>
+<p class="hero-subtitle">Transform your exported WhatsApp chats into beautiful, interactive conversations. Revisit precious moments with friends and family in an authentic chat interface.</p>
+<ul class="hero-features">
+<li>Upload any WhatsApp chat export</li>
+<li>Authentic WhatsApp-style display</li>
+<li>Preserve your precious memories</li>
+<li>100% Private & Secure</li>
+</ul>
+<div class="cta-buttons">
+<a href="index1.html" class="cta-primary">
+🚀 Start Reliving Memories
+</a>
+<a href="#features" class="cta-secondary">Learn More</a>
+</div>
+</div>
+<!-- WhatsApp-style phone mockup -->
+<div class="hero-visual">
+<div class="phone-mockup whatsapp-mockup">
+<div class="phone-screen whatsapp-screen">
+<div class="chat-header-mock whatsapp-header">
+<span>💞 Family Group</span>
+</div>
+<div class="chat-messages-mock whatsapp-messages">
+<div class="message-mock whatsapp-message received">
+Hey! How was your day? 😊
+</div>
+<div class="message-mock whatsapp-message sent">
+It was amazing! Just like old times
+</div>
+<div class="message-mock whatsapp-message received">
+I miss those days so much 💭
+</div>
+<div class="message-mock whatsapp-message sent">
+Me too! Good thing we have these chats
+</div>
+<div class="message-mock whatsapp-message received">
+WhatsApp Replay is perfect! 🎉
+</div>
+<div class="message-mock whatsapp-message sent">
+Now we can relive all our memories
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End WhatsApp-style phone mockup -->
+</div>
+</section>
+<!-- Features Section -->
+<section class="features" id="features">
+<div class="features-container">
+<h2 class="features-title">Why Choose WhatsApp Replay?</h2>
+<div class="features-grid">
+code
+Code
+<div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/368381/smartphone-heart.svg" alt="Smartphone with heart icon" />
       </div>
-      <!-- WhatsApp-style phone mockup -->
-      <div class="hero-visual">
-        <div class="phone-mockup whatsapp-mockup">
-          <div class="phone-screen whatsapp-screen">
-            <div class="chat-header-mock whatsapp-header">
-              <span>💞 Family Group</span>
-            </div>
-            <div class="chat-messages-mock whatsapp-messages">
-              <div class="message-mock whatsapp-message received">
-                Hey! How was your day? 😊
-              </div>
-              <div class="message-mock whatsapp-message sent">
-                It was amazing! Just like old times
-              </div>
-              <div class="message-mock whatsapp-message received">
-                I miss those days so much 💭
-              </div>
-              <div class="message-mock whatsapp-message sent">
-                Me too! Good thing we have these chats
-              </div>
-              <div class="message-mock whatsapp-message received">
-                WhatsApp Replay is perfect! 🎉
-              </div>
-              <div class="message-mock whatsapp-message sent">
-                Now we can relive all our memories
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End WhatsApp-style phone mockup -->
+      <h3>Authentic Experience</h3>
+      <p>Relive your conversations in the exact same WhatsApp interface you know and love. Every detail is perfectly recreated.</p>
     </div>
-  </section>
 
-  <!-- Features Section -->
-  <section class="features" id="features">
-    <div class="features-container">
-      <h2 class="features-title">Why Choose WhatsApp Replay?</h2>
-      <div class="features-grid">
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/368381/smartphone-heart.svg" alt="Smartphone with heart icon" />
-          </div>
-          <h3>Authentic Experience</h3>
-          <p>Relive your conversations in the exact same WhatsApp interface you know and love. Every detail is perfectly recreated.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/429922/security-safe-shield.svg" alt="Security shield icon" />
-          </div>
-          <h3>100% Private</h3>
-          <p>Your chats never leave your device. Everything processes locally in your browser for complete privacy and security.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/434336/puzzle.svg" alt="Puzzle piece icon" />
-          </div>
-          <h3>Instant Processing</h3>
-          <p>Upload your chat export and see your memories come to life instantly. No waiting, no delays, just pure nostalgia.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/434342/sun.svg" alt="Sun icon" />
-          </div>
-          <h3>Universal Support</h3>
-          <p>Works with WhatsApp exports from any device - Android, iPhone, or WhatsApp Web. All formats supported.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/434320/heart-hand.svg" alt="Heart in hand icon" />
-          </div>
-          <h3>Preserve Memories</h3>
-          <p>Keep your precious conversations alive forever. Perfect for anniversary celebrations, remembering loved ones, or just nostalgia.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">
-            <img src="https://www.svgrepo.com/show/202990/web-design.svg" alt="Web design icon" />
-          </div>
-          <h3>Beautiful Design</h3>
-          <p>Clean, modern interface that makes browsing your old chats a delightful experience on any device.</p>
-        </div>
-
+    <div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/429922/security-safe-shield.svg" alt="Security shield icon" />
       </div>
+      <h3>100% Private</h3>
+      <p>Your chats never leave your device. Everything processes locally in your browser for complete privacy and security.</p>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <div id="footer-placeholder"></div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/434336/puzzle.svg" alt="Puzzle piece icon" />
+      </div>
+      <h3>Instant Processing</h3>
+      <p>Upload your chat export and see your memories come to life instantly. No waiting, no delays, just pure nostalgia.</p>
+    </div>
 
-  <script src="main.js"></script>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/434342/sun.svg" alt="Sun icon" />
+      </div>
+      <h3>Universal Support</h3>
+      <p>Works with WhatsApp exports from any device - Android, iPhone, or WhatsApp Web. All formats supported.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/434320/heart-hand.svg" alt="Heart in hand icon" />
+      </div>
+      <h3>Preserve Memories</h3>
+      <p>Keep your precious conversations alive forever. Perfect for anniversary celebrations, remembering loved ones, or just nostalgia.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <img src="https://www.svgrepo.com/show/202990/web-design.svg" alt="Web design icon" />
+      </div>
+      <h3>Beautiful Design</h3>
+      <p>Clean, modern interface that makes browsing your old chats a delightful experience on any device.</p>
+    </div>
+
+  </div>
+</div>
+</section>
+<!-- Footer Placeholder -->
+<div id="footer-placeholder"></div>
+<!-- Script to load header/footer -->
+<script src="js/app.js"></script>
+<!-- Script for page-specific interactions -->
+<script src="js/main.js"></script>
 </body>
 </html>
