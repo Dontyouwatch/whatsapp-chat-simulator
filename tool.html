@@ -5,28 +5,188 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WhatsApp Chat Replay</title>
-  <link rel="stylesheet" href="style.css">
-  <script>
-    // Helper to load external HTML (header/footer)
-    function includeHTML(file, elementId) {
-      fetch(file)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById(elementId).innerHTML = data;
-        });
+  <style>
+    /* General Styling */
+    :root {
+      --ios-outgoing-bg: #dcf8c6;
+      --ios-incoming-bg: #ffffff;
+      --light-bg: #ece5dd;
+      --dark-bg: #121212;
+      --classic-bg-url: url('https://i.pinimg.com/originals/85/70/f6/8570f6339d3189a0f4738520853a1a1f.jpg');
+      --tick-blue: #34B7F1;
     }
-    document.addEventListener("DOMContentLoaded", function() {
-      includeHTML('header.html', 'header-placeholder');
-      includeHTML('footer.html', 'footer-placeholder');
-    });
-  </script>
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Mobile Phone Simulator */
+    .mobile-frame {
+      width: 380px;
+      height: 800px;
+      background-color: #111;
+      border-radius: 40px;
+      padding: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .screen {
+      background-color: var(--light-bg);
+      flex-grow: 1;
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ✅ CORRECTED WhatsApp Header CSS */
+    .chat-header {
+      background-color: #f7f7f7; /* Modern light grey header */
+      padding: 8px 12px;
+      z-index: 20;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      border-bottom: 1px solid #ddd;
+    }
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .status-icon {
+        width: 16px;
+        height: 16px;
+    }
+    .app-bar {
+      display: flex;
+      align-items: center;
+    }
+    .chat-title {
+      flex-grow: 1;
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px;
+      margin-left: 15px;
+    }
+    .app-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .app-icon {
+      width: 24px;
+      height: 24px;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    /* Chat Area */
+    .chat-area {
+      flex-grow: 1;
+      overflow-y: scroll;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      background-image: var(--classic-bg-url);
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      transition: font-size 0.2s ease;
+    }
+    .chat-area::-webkit-scrollbar { display: none; }
+    .message-container { display: flex; flex-direction: column; margin-bottom: 2px; }
+
+    /* Message Bubble & Timestamp CSS */
+    .message {
+      max-width: 80%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      position: relative;
+      animation: slideIn 0.3s ease-out;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    }
+    .message::after { content: ""; clear: both; display: table; }
+    .outgoing { background-color: var(--ios-outgoing-bg); align-self: flex-end; }
+    .incoming { background-color: var(--ios-incoming-bg); align-self: flex-start; }
+    .message-text { white-space: pre-wrap; word-wrap: break-word; }
+
+    /* Meta Container */
+    .message-meta { float: right; margin-left: 10px; position: relative; bottom: -5px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+    .timestamp { font-size: 0.7em; color: #888; }
+    .edited-tag { font-style: italic; color: #888; font-size: 0.7em; opacity: 0.9; }
+
+    /* Pure CSS Double Tick Icon */
+    .double-tick { display: inline-flex; align-items: center; position: relative; width: 16px; height: 12px; }
+    .tick { width: 5px; height: 10px; border-right: 2px solid grey; border-bottom: 2px solid grey; transform: rotate(45deg); position: absolute; }
+    .tick:first-of-type { left: 0; }
+    .tick:last-of-type { left: 5px; }
+    .double-tick.read .tick { border-color: var(--tick-blue); }
+
+    /* Date Indicators */
+    .date-indicator { align-self: center; text-align: center; margin: 15px 0; padding: 6px 12px; background-color: rgba(224, 224, 224, 0.8); border-radius: 12px; font-size: 0.8em; color: #555; font-weight: 500; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
+    .floating-date { position: absolute; top: 75px; left: 50%; transform: translateX(-50%); background-color: rgba(224, 224, 224, 0.9); padding: 6px 12px; border-radius: 12px; z-index: 10; font-size: 0.8em; font-weight: 500; opacity: 0; transition: opacity 0.3s ease, font-size 0.2s ease; }
+
+    /* Redesigned Text Box */
+    .text-input-area { padding: 10px; background-color: #f0f0f0; border-top: 1px solid #ddd; }
+    .input-wrapper { display: flex; align-items: center; background-color: #ffffff; border-radius: 25px; padding: 6px 10px; gap: 8px; }
+    .text-input { flex-grow: 1; border: none; outline: none; background: transparent; font-size: 16px; padding: 10px; }
+    .icon-button { background: none; border: none; cursor: pointer; padding: 5px; display: flex; }
+    .icon-button img { width: 24px; height: 24px; opacity: 0.6; }
+    .send-button { background-color: #25D366; border: none; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+    .send-icon { width: 22px; height: 22px; }
+
+    /* Controls */
+    @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .controls { width: 300px; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+    .control-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 5px; font-weight: bold; }
+    .controls button, .controls input, .controls select { width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
+    .controls button { background-color: #007bff; color: white; border: none; cursor: pointer; }
+    .controls button:hover { background-color: #0056b3; }
+
+    /* Theme & Platform Styles */
+    .dark .chat-header { background-color: #1e1e1e; border-color: #333; color: #f0f0f0;}
+    .dark .status-icon, .dark .app-icon { filter: invert(1); opacity: 0.7; }
+    .dark .text-input-area { background-color: #1e1e1e; border-color: #333; }
+    .dark .input-wrapper { background-color: #2c2c2c; }
+    .dark .text-input { color: #f0f0f0; }
+    .dark .incoming { background-color: #2c2c2c; }
+    .dark .outgoing { background-color: #056162; }
+    .dark .date-indicator { background-color: rgba(44, 44, 44, 0.8); color: #ccc; }
+    .dark .floating-date { background-color: rgba(44, 44, 44, 0.9); color: #ccc; }
+    .dark .chat-area { background-color: #0d1418; background-image: none; }
+  </style>
 </head>
 
 <body>
-  <!-- Header -->
+  <!-- === MODIFICATION START: Header Placeholder === -->
   <div id="header-placeholder"></div>
+  <!-- === MODIFICATION END === -->
 
-  <!-- Main Tool Content -->
   <div class="main-container">
     <div class="mobile-frame">
       <div class="screen" id="screen">
@@ -77,11 +237,218 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- === MODIFICATION START: Footer Placeholder === -->
   <div id="footer-placeholder"></div>
+  <!-- === MODIFICATION END === -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="main.js"></script>
+
+  <script>
+    // This is your existing, unchanged script for the chat functionality.
+    document.addEventListener('DOMContentLoaded', () => {
+      // Element references
+      const fileUpload = document.getElementById('fileUpload');
+      const chatArea = document.getElementById('chatArea');
+      const floatingDate = document.getElementById('floatingDate');
+      const screen = document.getElementById('screen');
+      const chatTitle = document.getElementById('chatTitle');
+      const currentTimeEl = document.getElementById('currentTime');
+      const fontSizeSlider = document.getElementById('fontSize');
+      const fontSizeValue = document.getElementById('fontSizeValue');
+      let allMessages = [];
+      let users = [];
+      let currentUserPerspective = 0;
+
+      function updateTime() {
+        const now = new Date();
+        currentTimeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }
+      updateTime(); setInterval(updateTime, 1000);
+      
+      fileUpload.addEventListener('change', (event) => {
+        const file = event.target.files[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const content = e.target.result;
+          users = []; allMessages = parseChat(content);
+          if (allMessages.length > 0) {
+            renderChat();
+            chatTitle.textContent = users.length > 1 ? users[1] : 'WhatsApp Chat';
+          } else {
+            chatArea.innerHTML = '<p style="text-align: center; padding: 20px; color: #555;">Could not parse the chat file.</p>';
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      function parseWhatsAppDate(dateString) {
+        const match = dateString.match(/(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4}), (\d{1,2}:\d{2}(?:\s?[AP]M)?)/);
+        if (!match) return null;
+        let day, month;
+        const yearPart = match[3].length === 2 ? `20${match[3]}` : match[3];
+        if (parseInt(match[1], 10) > 12) { day = match[1]; month = match[2]; } else { month = match[1]; day = match[2]; }
+        return new Date(`${month}/${day}/${yearPart} ${match[4]}`);
+      }
+
+      function parseChat(data) {
+        const lines = data.split('\n');
+        const parsedMessages = [];
+        const regex = /^\[?(\d{1,2}[.\/]\d{1,2}[.\/]\d{2,4}, \d{1,2}:\d{2}(?::\d{2})?(?:\s?[AP]M)?)\]?\s(?:- |)\s*([^:]+):\s([\s\S]+)/;
+        const editedStringIdentifier = "<This message was edited>";
+        let lastMessage = null;
+
+        for (const line of lines) {
+          const match = line.match(regex);
+          if (match) {
+            const date = parseWhatsAppDate(match[1]); if (!date) continue;
+            const sender = match[2].trim();
+            let text = match[3].trim();
+            let isEdited = false;
+            
+            if (text.includes(editedStringIdentifier)) {
+              isEdited = true;
+              text = text.replace(editedStringIdentifier, "").trim();
+            }
+
+            if (!users.includes(sender)) users.push(sender);
+            const messageData = { type: 'message', date, sender, text, edited: isEdited };
+            parsedMessages.push(messageData);
+            lastMessage = messageData;
+          } else if (lastMessage && line.trim()) {
+            let currentLine = line.trim();
+            if (currentLine.includes(editedStringIdentifier)) {
+              lastMessage.edited = true;
+              currentLine = currentLine.replace(editedStringIdentifier, "").trim();
+            }
+            if (currentLine) { lastMessage.text += '\n' + currentLine; }
+          } else {
+            lastMessage = null;
+          }
+        }
+        return parsedMessages;
+      }
+
+      function renderChat() {
+        chatArea.innerHTML = ''; let lastDate = '';
+        allMessages.forEach(msg => {
+          if (msg.type !== 'message') return;
+          const messageDate = msg.date.toDateString();
+          if (messageDate !== lastDate) {
+            const dateElement = document.createElement('div');
+            dateElement.classList.add('date-indicator');
+            dateElement.textContent = messageDate; dateElement.dataset.date = messageDate;
+            chatArea.appendChild(dateElement); lastDate = messageDate;
+          }
+          const messageContainer = document.createElement('div'); messageContainer.classList.add('message-container');
+          const messageElement = document.createElement('div'); messageElement.classList.add('message');
+          const mainUser = users[currentUserPerspective];
+          const isOutgoing = msg.sender === mainUser;
+          messageElement.classList.add(isOutgoing ? 'outgoing' : 'incoming');
+          const metaContainer = document.createElement('span'); metaContainer.classList.add('message-meta');
+          if (msg.edited) {
+            const editedTag = document.createElement('span');
+            editedTag.classList.add('edited-tag');
+            editedTag.textContent = 'edited';
+            metaContainer.appendChild(editedTag);
+          }
+          const timeElement = document.createElement('span');
+          timeElement.classList.add('timestamp');
+          timeElement.textContent = msg.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          metaContainer.appendChild(timeElement);
+          if (isOutgoing) {
+            const statusElement = document.createElement('span');
+            statusElement.classList.add('double-tick', 'read');
+            statusElement.innerHTML = `<span class="tick"></span><span class="tick"></span>`;
+            metaContainer.appendChild(statusElement);
+          }
+          const textElement = document.createElement('span');
+          textElement.classList.add('message-text');
+          textElement.textContent = msg.text;
+          messageElement.appendChild(textElement);
+          messageElement.appendChild(metaContainer);
+          messageContainer.appendChild(messageElement);
+          chatArea.appendChild(messageContainer);
+        });
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+      
+      chatArea.addEventListener('scroll', () => {
+        const dateElements = chatArea.querySelectorAll('.date-indicator'); let topDate = null;
+        for (let el of dateElements) { if (el.getBoundingClientRect().top < chatArea.getBoundingClientRect().top + 20) { topDate = el.textContent; } }
+        if (topDate) { floatingDate.textContent = topDate; floatingDate.style.opacity = '1'; } 
+        else { floatingDate.style.opacity = '0'; }
+      });
+      document.getElementById('newChat').addEventListener('click', () => location.reload());
+      document.getElementById('platformToggle').addEventListener('change', (e) => screen.classList.toggle('android', e.target.value === 'android'));
+      document.getElementById('perspectiveToggle').addEventListener('click', () => {
+        if (users.length > 1) {
+          currentUserPerspective = (currentUserPerspective + 1) % users.length;
+          chatTitle.textContent = users[(currentUserPerspective + 1) % users.length];
+          renderChat();
+        }
+      });
+      document.getElementById('bgChange').addEventListener('change', (e) => {
+        chatArea.style.backgroundImage = 'none'; chatArea.style.backgroundColor = 'transparent';
+        switch (e.target.value) {
+          case 'light': chatArea.style.backgroundColor = '#f0f0f0'; break;
+          case 'gradient': chatArea.style.background = 'linear-gradient(to bottom, #ece5dd, #d8d0c3)'; break;
+          case 'classic': chatArea.style.backgroundImage = 'var(--classic-bg-url)'; break;
+        }
+      });
+      document.getElementById('themeMode').addEventListener('change', (e) => screen.classList.toggle('dark', e.target.value === 'dark'));
+      fontSizeSlider.addEventListener('input', (e) => {
+        const size = e.target.value;
+        const newSize = `${size}px`;
+        chatArea.style.fontSize = newSize;
+        floatingDate.style.fontSize = newSize;
+        fontSizeValue.textContent = size;
+      });
+      document.getElementById('searchBar').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        chatArea.querySelectorAll('.message').forEach(msg => {
+          msg.style.border = (searchTerm && msg.textContent.toLowerCase().includes(searchTerm)) ? '2px solid #ffc107' : 'none';
+        });
+      });
+      document.getElementById('jumpToDate').addEventListener('change', (e) => {
+        const targetDateStr = new Date(e.target.value).toDateString();
+        const dateElement = chatArea.querySelector(`.date-indicator[data-date="${targetDateStr}"]`);
+        if (dateElement) dateElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      document.getElementById('exportPdf').addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        html2canvas(chatArea).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a4');
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save("whatsapp-chat-replay.pdf");
+        });
+      });
+    });
+  </script>
+
+  <!-- === MODIFICATION START: New script to load header and footer === -->
+  <script>
+    // Fetch and inject the header
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading the header:', error));
+
+    // Fetch and inject the footer
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading the footer:', error));
+  </script>
+  <!-- === MODIFICATION END === -->
+
 </body>
+
 </html>
