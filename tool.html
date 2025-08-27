@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WhatsApp Chat Replay</title>
   
-  <!-- ADDED: Link to the main stylesheet for header/footer styles -->
   <link rel="stylesheet" href="css/style.css">
 
   <style>
@@ -18,9 +17,11 @@
       --dark-bg: #121212;
       --classic-bg-url: url('https://i.pinimg.com/originals/85/70/f6/8570f6339d3189a0f4738520853a1a1f.jpg');
       --tick-blue: #34B7F1;
+      /* CUSTOMIZATION: Added green theme color */
+      --theme-green: #25D366;
+      --theme-green-dark: #20c45a;
     }
 
-    /* MODIFIED: Changed 'body' to '#tool-wrapper' to isolate these styles to the tool's content */
     #tool-wrapper {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       background-color: #f4f4f4;
@@ -29,15 +30,14 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: 95px;
+      padding: 20px;
       box-sizing: border-box;
+      padding-top: 103px;
     }
     
-    /* ADDED: A basic body style to ensure proper layout with header/footer */
     body {
         margin: 0;
         padding: 0;
-        /* This ensures the font from style.css doesn't override the tool's font */
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto; 
     }
 
@@ -48,138 +48,103 @@
       justify-content: center;
     }
 
-    /* Mobile Phone Simulator */
-    .mobile-frame {
-      width: 380px;
-      height: 800px;
-      background-color: #111;
-      border-radius: 40px;
-      padding: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .screen {
-      background-color: var(--light-bg);
-      flex-grow: 1;
-      border-radius: 25px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* ✅ CORRECTED WhatsApp Header CSS */
-    .chat-header {
-      background-color: #f7f7f7; /* Modern light grey header */
-      padding: 8px 12px;
-      z-index: 20;
-      border-top-left-radius: 25px;
-      border-top-right-radius: 25px;
-      border-bottom: 1px solid #ddd;
-    }
-    .status-bar {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      margin-bottom: 8px;
-    }
-    .status-icons {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .status-icon {
-        width: 16px;
-        height: 16px;
-    }
-    .app-bar {
-      display: flex;
-      align-items: center;
-    }
-    .chat-title {
-      flex-grow: 1;
-      text-align: left;
-      font-weight: bold;
-      font-size: 18px;
-      margin-left: 15px;
-    }
-    .app-actions {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .app-icon {
-      width: 24px;
-      height: 24px;
-      opacity: 0.7;
-      cursor: pointer;
-    }
-
-    /* Chat Area */
-    .chat-area {
-      flex-grow: 1;
-      overflow-y: scroll;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      background-image: var(--classic-bg-url);
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      transition: font-size 0.2s ease;
-    }
+    /* --- The rest of your mobile frame CSS is unchanged --- */
+    .mobile-frame { width: 380px; height: 800px; background-color: #111; border-radius: 40px; padding: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; }
+    .screen { background-color: var(--light-bg); flex-grow: 1; border-radius: 25px; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+    .chat-header { background-color: #f7f7f7; padding: 8px 12px; z-index: 20; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom: 1px solid #ddd; }
+    .status-bar { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px; }
+    .status-icons { display: flex; align-items: center; gap: 4px; }
+    .status-icon { width: 16px; height: 16px; }
+    .app-bar { display: flex; align-items: center; }
+    .chat-title { flex-grow: 1; text-align: left; font-weight: bold; font-size: 18px; margin-left: 15px; }
+    .app-actions { display: flex; align-items: center; gap: 15px; }
+    .app-icon { width: 24px; height: 24px; opacity: 0.7; cursor: pointer; }
+    .chat-area { flex-grow: 1; overflow-y: scroll; padding: 10px; display: flex; flex-direction: column; background-image: var(--classic-bg-url); scrollbar-width: none; -ms-overflow-style: none; transition: font-size 0.2s ease; }
     .chat-area::-webkit-scrollbar { display: none; }
     .message-container { display: flex; flex-direction: column; margin-bottom: 2px; }
-
-    /* Message Bubble & Timestamp CSS */
-    .message {
-      max-width: 80%;
-      padding: 8px 12px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      position: relative;
-      animation: slideIn 0.3s ease-out;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    }
+    .message { max-width: 80%; padding: 8px 12px; border-radius: 12px; margin-bottom: 10px; position: relative; animation: slideIn 0.3s ease-out; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
     .message::after { content: ""; clear: both; display: table; }
     .outgoing { background-color: var(--ios-outgoing-bg); align-self: flex-end; }
     .incoming { background-color: var(--ios-incoming-bg); align-self: flex-start; }
     .message-text { white-space: pre-wrap; word-wrap: break-word; }
-
-    /* Meta Container */
     .message-meta { float: right; margin-left: 10px; position: relative; bottom: -5px; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
     .timestamp { font-size: 0.7em; color: #888; }
     .edited-tag { font-style: italic; color: #888; font-size: 0.7em; opacity: 0.9; }
-
-    /* Pure CSS Double Tick Icon */
     .double-tick { display: inline-flex; align-items: center; position: relative; width: 16px; height: 12px; }
     .tick { width: 5px; height: 10px; border-right: 2px solid grey; border-bottom: 2px solid grey; transform: rotate(45deg); position: absolute; }
     .tick:first-of-type { left: 0; }
     .tick:last-of-type { left: 5px; }
     .double-tick.read .tick { border-color: var(--tick-blue); }
-
-    /* Date Indicators */
     .date-indicator { align-self: center; text-align: center; margin: 15px 0; padding: 6px 12px; background-color: rgba(224, 224, 224, 0.8); border-radius: 12px; font-size: 0.8em; color: #555; font-weight: 500; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
     .floating-date { position: absolute; top: 75px; left: 50%; transform: translateX(-50%); background-color: rgba(224, 224, 224, 0.9); padding: 6px 12px; border-radius: 12px; z-index: 10; font-size: 0.8em; font-weight: 500; opacity: 0; transition: opacity 0.3s ease, font-size 0.2s ease; }
-
-    /* Redesigned Text Box */
     .text-input-area { padding: 10px; background-color: #f0f0f0; border-top: 1px solid #ddd; }
     .input-wrapper { display: flex; align-items: center; background-color: #ffffff; border-radius: 25px; padding: 6px 10px; gap: 8px; }
     .text-input { flex-grow: 1; border: none; outline: none; background: transparent; font-size: 16px; padding: 10px; }
     .icon-button { background: none; border: none; cursor: pointer; padding: 5px; display: flex; }
     .icon-button img { width: 24px; height: 24px; opacity: 0.6; }
-    .send-button { background-color: #25D366; border: none; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+    .send-button { background-color: var(--theme-green); border: none; border-radius: 50%; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
     .send-icon { width: 22px; height: 22px; }
 
-    /* Controls */
+    /* Controls Customizations */
     @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .controls { width: 300px; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
-    .control-group { margin-bottom: 20px; }
-    label { display: block; margin-bottom: 5px; font-weight: bold; }
-    .controls button, .controls input, .controls select { width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-    .controls button { background-color: #007bff; color: white; border: none; cursor: pointer; }
-    .controls button:hover { background-color: #0056b3; }
+    
+    .controls { 
+      width: 300px; 
+      padding: 20px; 
+      background-color: #fff; 
+      border-radius: 10px; 
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+    }
+
+    .control-group { 
+      /* CUSTOMIZATION: Reduced bottom margin to decrease spacing */
+      margin-bottom: 15px; 
+    }
+    
+    label { 
+      display: block; 
+      margin-bottom: 5px; 
+      font-weight: bold; 
+    }
+    
+    .controls button, .controls input, .controls select { 
+      width: 100%; 
+      padding: 8px; 
+      /* CUSTOMIZATION: Reduced bottom margin */
+      margin-bottom: 5px; 
+      border-radius: 5px; 
+      border: 1px solid #ccc; 
+      box-sizing: border-box; 
+    }
+    
+    .controls button { 
+      /* CUSTOMIZATION: Changed button color to green */
+      background-color: var(--theme-green); 
+      color: white; 
+      border: none; 
+      cursor: pointer; 
+      transition: background-color 0.2s ease;
+    }
+    
+    .controls button:hover { 
+      /* CUSTOMIZATION: Changed hover color to a darker green */
+      background-color: var(--theme-green-dark); 
+    }
+
+    /* CUSTOMIZATION: Theming for the range slider */
+    .controls input[type="range"] { -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
+    .controls input[type="range"]::-webkit-slider-runnable-track { background: #d3f3df; height: 0.5rem; border-radius: 1rem; }
+    .controls input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -4px; background-color: var(--theme-green); height: 1.25rem; width: 1.25rem; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .controls input[type="range"]::-moz-range-track { background: #d3f3df; height: 0.5rem; border-radius: 1rem; }
+    .controls input[type="range"]::-moz-range-thumb { background-color: var(--theme-green); height: 1.25rem; width: 1.25rem; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+    /* CUSTOMIZATION: Theming for focused inputs */
+    .controls input:focus, .controls select:focus {
+        border-color: var(--theme-green);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+    }
+
 
     /* Theme & Platform Styles */
     .dark .chat-header { background-color: #1e1e1e; border-color: #333; color: #f0f0f0;}
@@ -197,10 +162,8 @@
 
 <body>
 
-  <!-- ADDED: Header Placeholder -->
   <div id="header-placeholder"></div>
 
-  <!-- ADDED: Main content wrapper -->
   <main id="tool-wrapper">
     <div class="main-container">
       <div class="mobile-frame">
@@ -253,18 +216,16 @@
     </div>
   </main>
 
-  <!-- ADDED: Footer Placeholder -->
   <div id="footer-placeholder"></div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-  <!-- ADDED: Script to load the header and footer -->
   <script src="js/app.js"></script>
 
   <script>
+    // --- All your JavaScript is unchanged ---
     document.addEventListener('DOMContentLoaded', () => {
-      // Element references
       const fileUpload = document.getElementById('fileUpload');
       const chatArea = document.getElementById('chatArea');
       const floatingDate = document.getElementById('floatingDate');
@@ -308,12 +269,11 @@
         return new Date(`${month}/${day}/${yearPart} ${match[4]}`);
       }
 
-      // ✅ PRESERVED your improved parseChat function
       function parseChat(data) {
         const lines = data.split('\n');
         const parsedMessages = [];
         const regex = /^\[?(\d{1,2}[.\/]\d{1,2}[.\/]\d{2,4}, \d{1,2}:\d{2}(?::\d{2})?(?:\s?[AP]M)?)\]?\s(?:- |)\s*([^:]+):\s([\s\S]+)/;
-        const editedStringIdentifier = "<This message was edited>"; // Identifier for edited messages
+        const editedStringIdentifier = "<This message was edited>";
         let lastMessage = null;
 
         for (const line of lines) {
@@ -324,7 +284,6 @@
             let text = match[3].trim();
             let isEdited = false;
             
-            // Check for the "edited" string and remove it from the text
             if (text.includes(editedStringIdentifier)) {
               isEdited = true;
               text = text.replace(editedStringIdentifier, "").trim();
@@ -392,7 +351,6 @@
         chatArea.scrollTop = chatArea.scrollHeight;
       }
       
-      // --- UI AND CONTROLS ---
       chatArea.addEventListener('scroll', () => {
         const dateElements = chatArea.querySelectorAll('.date-indicator'); let topDate = null;
         for (let el of dateElements) { if (el.getBoundingClientRect().top < chatArea.getBoundingClientRect().top + 20) { topDate = el.textContent; } }
