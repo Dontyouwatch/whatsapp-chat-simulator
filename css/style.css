@@ -63,7 +63,7 @@ body {
 }
 
 .cta-nav {
-  background: #25d366;
+  background: #1da851;
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
@@ -420,14 +420,14 @@ body {
 }
 
 .footer-section h3 {
-  color: #25d366;
+  color: #1da851;
   margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
 }
 
 .footer-section p,
 .footer-section a {
-  color: #ccc;
+  color: #e0e0e0;
   text-decoration: none;
   line-height: 1.8;
   font-family: "Poppins", sans-serif;
@@ -442,7 +442,7 @@ body {
   padding-top: 2rem;
   margin-top: 2rem;
   border-top: 1px solid #555;
-  color: #999;
+  color: #e0e0e0;
   font-family: "Poppins", sans-serif;
 }
 
