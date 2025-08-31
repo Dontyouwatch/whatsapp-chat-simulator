@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - WhatsApp Replay</title>
+
+  <!-- Link to your main stylesheet for header, footer, and base styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific styles for the "How It Works" content -->
+  <style>
+    /* Page Header Styling (similar to about page for consistency) */
+    .page-header {
+      padding: 120px 2rem 4rem 2rem; /* Added padding for fixed header */
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Steps Section Styling */
+    .steps-section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .step-card {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Alternate layout for every other step */
+    .step-card:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .step-icon {
+      flex-shrink: 0;
+      background-color: #e8f5e9; /* Light green background */
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-icon img {
+      width: 70px;
+      height: 70px;
+    }
+
+    .step-content .step-number {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #25D366; /* Theme green */
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .step-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+    }
+    
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 768px) {
+      .step-card,
+      .step-card:nth-child(even) {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+      }
+      .step-icon {
+          width: 120px;
+          height: 120px;
+      }
+      .step-icon img {
+          width: 60px;
+          height: 60px;
+      }
+    }
+    
+    /* Call to Action Section */
+    .cta-section {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+    .cta-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .cta-section .cta-primary {
+        /* Reusing the button style from the main CSS */
+        font-size: 1.2rem;
+        padding: 1rem 2.5rem;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Header is automatically loaded here -->
+  <div id="header-placeholder"></div>
+
+  <!-- Main Content for "How It Works" page -->
+  <main>
+    <section class="page-header">
+      <h1>Simple, Fast, and Secure</h1>
+      <p>Transforming your chat history into a browsable memory lane takes just a few clicks. Follow the simple steps below to get started.</p>
+    </section>
+
+    <section class="steps-section">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-icon">
+          <img src="https://www.svgrepo.com/show/521923/whatsapp.svg" alt="WhatsApp Icon">
+        </div>
+        <div class="step-content">
+          <div class="step-number">STEP 1</div>
+          <h2>Export Your Chat</h2>
+          <p>Open any chat in WhatsApp, tap the menu (⋮), select 'More', and then 'Export chat'. Choose the 'Without media' option to generate a lightweight .txt file of your entire conversation.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-icon">
+          <img src="https://www.svgrepo.com/show/493630/upload-3.svg" alt="Upload Icon">
+        </div>
+        <div class="step-content">
+          <div class="step-number">STEP 2</div>
+          <h2>Upload the File</h2>
+          <p>Head over to our tool page and click the 'Upload Chat File' button. Select the .txt file you just exported. Your data is processed instantly and securely right in your browser—nothing is ever uploaded to a server.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-icon">
+          <img src="https://www.svgrepo.com/show/497424/chat-bubble-smile.svg" alt="Chat Bubble Icon">
+        </div>
+        <div class="step-content">
+          <div class="step-number">STEP 3</div>
+          <h2>Relive & Customize</h2>
+          <p>That's it! Your chat is now displayed in a familiar, interactive interface. Use the controls to change the theme, switch perspectives, search for messages, or even export your beautiful chat view as a PDF.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="cta-section">
+        <h2>Ready to See Your Memories?</h2>
+        <a href="tool.html" class="cta-primary">🚀 Try It Now</a>
+    </section>
+
+  </main>
+
+  <!-- Footer is automatically loaded here -->
+  <div id="footer-placeholder"></div>
+
+  <!-- This script loads the header and footer -->
+  <script src="js/app.js"></script>
+  <!-- This script enables shared functionality like smooth scrolling -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
