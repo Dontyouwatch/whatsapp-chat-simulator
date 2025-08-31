@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - WhatsApp Replay</title>
+
+  <!-- Shared CSS for header, footer, and base styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Page-specific styles for the About page -->
+  <style>
+    /* Consistent Page Header */
+    .page-header {
+      padding: 120px 2rem 4rem 2rem;
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Main content styling */
+    .about-content {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    .about-content h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Team Section Styling */
+    .team-section {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: #fff;
+    }
+
+    .team-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-member {
+      background-color: #f8f9fa;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border: 4px solid #25D366;
+    }
+
+    .team-member h3 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .team-member p {
+      font-size: 1rem;
+      color: #25D366;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header is loaded here -->
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section class="page-header">
+      <h1>Our Mission</h1>
+      <p>We believe memories are precious. In a world of fleeting digital conversations, our mission is to provide a beautiful and private way to preserve the chats that define our most important relationships.</p>
+    </section>
+
+    <section class="about-content">
+      <h2>The Story Behind WhatsApp Replay</h2>
+      <p>WhatsApp Replay started from a simple, personal need: wanting to reread old conversations with loved ones without endlessly scrolling or squinting at a plain text file. We realized that the joy of these memories wasn't just in the words, but in the familiar back-and-forth flow of the chat interface itself.</p>
+      <p>We set out to build a tool that was not only functional but also delightful to use. Most importantly, we built it with privacy at its core. Your memories are yours alone, which is why our tool processes everything directly in your browser. Your chat files are never uploaded to a server, ensuring your conversations remain completely private.</p>
+    </section>
+
+    <section class="team-section">
+      <h2>Meet the Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/150?img=11" alt="Team Member 1">
+          <h3>Jane Doe</h3>
+          <p>Founder & Developer</p>
+        </div>
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/150?img=12" alt="Team Member 2">
+          <h3>John Smith</h3>
+          <p>UI/UX Designer</p>
+        </div>
+        <div class="team-member">
+          <img src="https://i.pravatar.cc/150?img=13" alt="Team Member 3">
+          <h3>Alex Ray</h3>
+          <p>Marketing Lead</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer is loaded here -->
+  <div id="footer-placeholder"></div>
+
+  <script src="js/app.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
